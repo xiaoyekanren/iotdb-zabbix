@@ -100,7 +100,20 @@ if __name__ == '__main__':
             path = os.path.join(cf.get('path', 'home'), 'data/wal')
         else:
             path = cf.get('path', 'wal')
-        results = os.popen('du -s %s' % path)
+        results = os.popen('du -s %s' % path).read()
+        print(results.split('\t')[0])
+    elif para == 'io_tps':
+        disk = cf.get('system', 'disk')
+        results = os.popen('iostat |grep \'%s\' |awk \'{print $2}\'' % disk).read()
+        print(results)
+    elif para == 'io_read_kb_s':
+        disk = cf.get('system', 'disk')
+        results = os.popen('iostat |grep \'%s\' |awk \'{print $3}\'' % disk).read()
+        print(results)
+    elif para == 'io_write_kb_s':
+        disk = cf.get('system', 'disk')
+        results = os.popen('iostat |grep \'%s\' |awk \'{print $4}\'' % disk).read()
+        print(results)
     elif para == '':
         pass
     else:

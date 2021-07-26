@@ -1,8 +1,3 @@
-## shell
-8. 监控磁盘io  
-9. wal 目录大小  
-    //这个有什么含义？？？  
-
 ## 不清楚
 1. memtable 大小
 2. 刷的频率  
@@ -27,4 +22,10 @@ avg points, avg time series
 7. 统计全部tsfile文件数量，count_all
 8. 统计全部tsfile文件大小，sum_all
 9. 统计全部resource文件大小，sum_resource
-10.
+10. wal
+11. tps,io_read,io_write
+
+## dependence
+sysstat
+python>=3.8
+apache-iotdb
