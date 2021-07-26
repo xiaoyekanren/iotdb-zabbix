@@ -13,20 +13,20 @@ avg points, avg time series
 
 
 ## 完成的：  
-1. 统计时间序列数量，count_timeseries  
-2. 统计存储组数量，count_storage_group  
-3. 统计顺序文件数量，count_seq  
-4. 统计顺序文件大小，sum_seq
-5. 统计乱序文件数量，count_unseq
-6. 统计乱序文件大小，sum_unseq
-7. 统计全部tsfile文件数量，count_all
-8. 统计全部tsfile文件大小，sum_all
-9. 统计全部resource文件大小，sum_resource
-10. 统计wal目录大小，sum_wal
+1. 统计时间序列数量，count_timeseries,int  
+2. 统计存储组数量，count_storage_group,int  
+3. 统计顺序文件数量，count_seq,int  
+4. 统计顺序文件大小，sum_seq,int
+5. 统计乱序文件数量，count_unseq,int
+6. 统计乱序文件大小，sum_unseq,int
+7. 统计全部tsfile文件数量，count_all,int
+8. 统计全部tsfile文件大小，sum_all,int
+9. 统计全部resource文件大小，sum_resource,int
+10. 统计wal目录大小，sum_wal,int
 11. 监控磁盘io  
-    tps: io_tps;  
-    read: io_read_kb_s;  
-    write: io_write_kb_s  
+    tps: io_tps,float;  
+    read: io_read_kb_s,float;  
+    write: io_write_kb_s,float  
 
 ## 依赖
 ### python依赖
