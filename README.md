@@ -28,4 +28,10 @@ avg points, avg time series
 1. 统计时间序列数量，count_timeseries  
 2. 统计存储组数量，count_storage_group  
 3. 统计顺序文件数量，count_seq  
-4.
+4. 统计顺序文件大小，sum_seq
+5. 统计乱序文件数量，count_unseq
+6. 统计乱序文件大小，sum_unseq
+7. 统计全部tsfile文件数量，count_all
+8. 统计全部tsfile文件大小，sum_all
+9. 统计全部resource文件大小，sum_resource
+10.

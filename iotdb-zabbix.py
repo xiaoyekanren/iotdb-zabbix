@@ -9,8 +9,8 @@ cf.read('config.ini', encoding='utf-8-sig')
 
 
 def error():
-    count = 'COUNT: count_timeseries | count_storage_group | count_seq | \n'
-    total = 'SUM: sum_seq | count_unseq | sum_unseq | \n'
+    count = 'COUNT: count_timeseries | count_storage_group | count_seq | count_unseq | count_all| \n'
+    total = 'SUM: sum_seq | sum_unseq | sum_all | sum_resource | \n'
     system = 'SYSTEM: '
 
     print('必须且只能指定一个参数，参数可以是:')
