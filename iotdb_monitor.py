@@ -32,12 +32,6 @@ def sql(order):
     session.close()
 
 
-def shell():
-    iotdb_path = cf.get('path', 'path')
-
-    pass
-
-
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         error()
@@ -105,15 +99,15 @@ if __name__ == '__main__':
     elif para == 'io_tps':
         disk = cf.get('system', 'disk')
         results = os.popen('iostat |grep \'%s\' |awk \'{print $2}\'' % disk).read()
-        print(int(results.replace('\n', '')))
+        print(float(results.replace('\n', '')))
     elif para == 'io_read_kb_s':
         disk = cf.get('system', 'disk')
         results = os.popen('iostat |grep \'%s\' |awk \'{print $3}\'' % disk).read()
-        print(int(results.replace('\n', '')))
+        print(float(results.replace('\n', '')))
     elif para == 'io_write_kb_s':
         disk = cf.get('system', 'disk')
         results = os.popen('iostat |grep \'%s\' |awk \'{print $4}\'' % disk).read()
-        print(int(results.replace('\n', '')))
+        print(float(results.replace('\n', '')))
     elif para == '':
         pass
     else:
