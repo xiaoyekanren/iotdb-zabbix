@@ -28,3 +28,4 @@ avg points, avg time series
 1. 统计时间序列数量，count_timeseries  
 2. 统计存储组数量，count_storage_group  
 3. 统计顺序文件数量，count_seq  
+4.
