@@ -49,38 +49,58 @@ if __name__ == '__main__':
     elif para == 'count_seq':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data/sequence')
-            result = os.popen('find %s -name \'*.tsfile\' | wc -l' % path).read()
-            print(int(result))
+        else:
+            path = cf.get('path', 'data')
+        result = os.popen('find %s -name \'*.tsfile\' | wc -l' % path).read()
+        print(int(result))
     elif para == 'sum_seq':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data/sequence')
-            results = os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % path).read()
-            print(results.split('\t')[0])
+        else:
+            path = cf.get('path', 'data')
+        results = os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % path).read()
+        print(results.split('\t')[0])
     elif para == 'count_unseq':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data/unsequence')
-            result = os.popen('find %s -name \'*.tsfile\' | wc -l' % path).read()
-            print(int(result))
+        else:
+            path = cf.get('path', 'data')
+        result = os.popen('find %s -name \'*.tsfile\' | wc -l' % path).read()
+        print(int(result))
     elif para == 'sum_unseq':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data/unsequence')
-            results = os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % path).read()
-            print(results.split('\t')[0])
+        else:
+            path = cf.get('path', 'data')
+        results = os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % path).read()
+        print(results.split('\t')[0])
     elif para == 'count_all':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data')
-            result = os.popen('find %s -name \'*.tsfile\' | wc -l' % path).read()
-            print(int(result))
+        else:
+            path = cf.get('path', 'data')
+        result = os.popen('find %s -name \'*.tsfile\' | wc -l' % path).read()
+        print(int(result))
     elif para == 'sum_all':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data')
-            results = os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % path).read()
-            print(results.split('\t')[0])
+        else:
+            path = cf.get('path', 'data')
+        results = os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % path).read()
+        print(results.split('\t')[0])
     elif para == 'sum_resource':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data')
-            results = os.popen('find %s -name \'*.tsfile.resource\' | xargs du -s -c | tail -n 1' % path).read()
-            print(results.split('\t')[0])
+        else:
+            path = cf.get('path', 'data')
+        results = os.popen('find %s -name \'*.tsfile.resource\' | xargs du -s -c | tail -n 1' % path).read()
+        print(results.split('\t')[0])
+    elif para == 'sum_wal':
+        if not cf.get('path', 'wal'):
+            path = os.path.join(cf.get('path', 'home'), 'data/wal')
+        else:
+            path = cf.get('path', 'wal')
+        results = os.popen('du -s %s' % path)
     elif para == '':
         pass
     else:
