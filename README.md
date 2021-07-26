@@ -25,8 +25,8 @@ avg points, avg time series
 10. 统计wal目录大小，sum_wal
 11. 监控磁盘io  
     tps: io_tps;  
-    read: io_read;  
-    write: io_write  
+    read: io_read_kb_s;  
+    write: io_write_kb_s  
 
 ## 依赖
 ### python依赖
