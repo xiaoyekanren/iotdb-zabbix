@@ -53,7 +53,7 @@ if __name__ == '__main__':
         else:
             path = cf.get('path', 'data')
         results = os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % path).read()
-        print(int(results.split('\t')[0]))
+        print(int(results.split('\t')[0]) * 1024)
     elif para == 'count_unseq':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data/unsequence')
@@ -67,7 +67,7 @@ if __name__ == '__main__':
         else:
             path = cf.get('path', 'data')
         results = os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % path).read()
-        print(int(results.split('\t')[0]))
+        print(int(results.split('\t')[0]) * 1024)
     elif para == 'count_all':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data')
@@ -81,21 +81,21 @@ if __name__ == '__main__':
         else:
             path = cf.get('path', 'data')
         results = os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % path).read()
-        print(int(results.split('\t')[0]))
+        print(int(results.split('\t')[0]) * 1024)
     elif para == 'sum_resource':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data')
         else:
             path = cf.get('path', 'data')
         results = os.popen('find %s -name \'*.tsfile.resource\' | xargs du -s -c | tail -n 1' % path).read()
-        print(int(results.split('\t')[0]))
+        print(int(results.split('\t')[0]) * 1024)
     elif para == 'sum_wal':
         if not cf.get('path', 'wal'):
             path = os.path.join(cf.get('path', 'home'), 'data/wal')
         else:
             path = cf.get('path', 'wal')
         results = os.popen('du -s %s' % path).read()
-        print(int(results.split('\t')[0]))
+        print(int(results.split('\t')[0]) * 1024)
     elif para == 'io_tps':
         disk = cf.get('system', 'disk')
         results = os.popen('iostat |grep \'%s\' |awk \'{print $2}\'' % disk).read()
