@@ -5,7 +5,7 @@ from configparser import ConfigParser
 from iotdb.Session import Session
 
 cf = ConfigParser()
-cf.read('config.ini', encoding='utf-8-sig')
+cf.read(os.path.join(os.getcwd(), 'config.ini'), encoding='utf-8-sig')
 
 
 def error():

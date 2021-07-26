@@ -35,3 +35,6 @@ apache-iotdb
 ### 其他依赖
 sysstat  
 
+## tips
+1. 注意用户权限，在普通用户下安装的pip依赖，在root用户下不能使用
+2. cf.get的路径有问题
