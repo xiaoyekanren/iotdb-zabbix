@@ -22,10 +22,16 @@ avg points, avg time series
 7. 统计全部tsfile文件数量，count_all
 8. 统计全部tsfile文件大小，sum_all
 9. 统计全部resource文件大小，sum_resource
-10. wal
-11. tps,io_read,io_write
+10. 统计wal目录大小，sum_wal
+11. 监控磁盘io  
+    tps: io_tps;  
+    read: io_read;  
+    write: io_write  
 
-## dependence
-sysstat
-python>=3.8
-apache-iotdb
+## 依赖
+### python依赖
+python>=3.8  
+apache-iotdb  
+### 其他依赖
+sysstat  
+
