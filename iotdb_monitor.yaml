@@ -1,0 +1,78 @@
+zabbix_export:
+  version: '5.4'
+  date: '2021-07-27T08:19:36Z'
+  groups:
+    -
+      uuid: f2481361f99448eea617b7b1d4765566
+      name: 'Discovered hosts'
+    -
+      uuid: dc579cd7a1a34222933f24f52a68bcd8
+      name: 'Linux servers'
+  templates:
+    -
+      uuid: 1738181f20a94c2f8effbb4ec2e8e850
+      template: IoTDB
+      name: IoTDB
+      groups:
+        -
+          name: 'Discovered hosts'
+        -
+          name: 'Linux servers'
+      items:
+        -
+          uuid: 0659f80eada9459dae275dee65027799
+          name: IoTDB-TsFile总数
+          key: 'iotdb_monitor[count_all]'
+        -
+          uuid: 8cd75fa5455a499ba3cd41ee3cb3aa36
+          name: IoTDB-顺序TsFile数量
+          key: 'iotdb_monitor[count_seq]'
+        -
+          uuid: 6d5577bea30a4afd9140feadb5841108
+          name: IoTDB-存储组
+          key: 'iotdb_monitor[count_storage_group]'
+        -
+          uuid: 03028bbd96a047dfb993843613552fb3
+          name: IoTDB-时间序列
+          key: 'iotdb_monitor[count_timeseries]'
+        -
+          uuid: db03421e99b94c358683660c043c3a56
+          name: IoTDB-乱序TsFile数量
+          key: 'iotdb_monitor[count_unseq]'
+        -
+          uuid: 4305f7913f544745b67e64220e693a42
+          name: DISK-Read
+          key: 'iotdb_monitor[io_read_kb_s]'
+          value_type: FLOAT
+          units: kb
+        -
+          uuid: a469a55900af47c4993525d26353c59c
+          name: DISK-TPS
+          key: 'iotdb_monitor[io_tps]'
+          value_type: FLOAT
+        -
+          uuid: 4c8b0a932adf406ea9f70639ac7e96a1
+          name: DISK-Write
+          key: 'iotdb_monitor[io_write_kb_s]'
+          value_type: FLOAT
+          units: kb
+        -
+          uuid: d391c4a04e994ee49227a95c2853f5f4
+          name: IoTDB-Tsfile总大小
+          key: 'iotdb_monitor[sum_all]'
+        -
+          uuid: 0bfa0a3130b947aa8661425e21da8e0e
+          name: IoTDB-resource大小
+          key: 'iotdb_monitor[sum_resource]'
+        -
+          uuid: f1cc663db7854f6391e0550cdc329b14
+          name: IoTDB-顺序TsFile大小
+          key: 'iotdb_monitor[sum_seq]'
+        -
+          uuid: 47508722f22a4fb6ac5ef2d7f4e5a34b
+          name: IoTDB-乱序TsFile大小
+          key: 'iotdb_monitor[sum_unseq]'
+        -
+          uuid: 068b4d810a15485dab8d4611c2f7b283
+          name: IoTDB-WAL大小
+          key: 'iotdb_monitor[sum_wal]'
