@@ -67,7 +67,7 @@ if __name__ == '__main__':
         else:
             path = cf.get('path', 'data')
         results = os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % path).read()
-        print(int(results.split('\t')[0]) * 1024)
+        print(int(results.split('\t')[0]) * 1024)  # du统计的是kb，所以要x1024，转成B
     elif para == 'count_all':
         if not cf.get('path', 'data'):
             path = os.path.join(cf.get('path', 'home'), 'data/data')
