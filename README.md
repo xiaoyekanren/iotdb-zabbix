@@ -32,8 +32,6 @@ avg points, avg time series
 ### python依赖
 python>=3.8  
 apache-iotdb  
-### 其他依赖
-sysstat  
 
 ## tips
 1. 注意用户权限，在普通用户下安装的pip依赖，在root用户下不能使用

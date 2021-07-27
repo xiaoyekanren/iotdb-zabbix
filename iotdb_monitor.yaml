@@ -40,23 +40,6 @@ zabbix_export:
           name: IoTDB-乱序TsFile数量
           key: 'iotdb_monitor[count_unseq]'
         -
-          uuid: 4305f7913f544745b67e64220e693a42
-          name: DISK-Read
-          key: 'iotdb_monitor[io_read_kb_s]'
-          value_type: FLOAT
-          units: kb
-        -
-          uuid: a469a55900af47c4993525d26353c59c
-          name: DISK-TPS
-          key: 'iotdb_monitor[io_tps]'
-          value_type: FLOAT
-        -
-          uuid: 4c8b0a932adf406ea9f70639ac7e96a1
-          name: DISK-Write
-          key: 'iotdb_monitor[io_write_kb_s]'
-          value_type: FLOAT
-          units: kb
-        -
           uuid: d391c4a04e994ee49227a95c2853f5f4
           name: IoTDB-Tsfile总大小
           key: 'iotdb_monitor[sum_all]'
