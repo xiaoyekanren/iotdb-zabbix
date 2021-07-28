@@ -33,7 +33,7 @@ def sql(order):
 
 def check_data(path):
     if not cf.get('path', path):
-        return os.path.join(cf.get('path', path), 'data/data')
+        return os.path.join(cf.get('path', 'iotdb_home'), 'data/data')
     else:
         return cf.get('path', path)
 
@@ -75,7 +75,7 @@ def main(para):
 
     elif para == 'sum_unseq':
         results = 0
-        paths = os.path.join(check_data('data'), 'unsequence')
+        paths = check_data('data')
         for path in paths.split(','):
             result = int(os.popen('find %s -name \'*.tsfile\' | xargs du -s -c | tail -n 1' % os.path.join(path, 'unsequence')).read().split('\t')[0])
             results += result
@@ -107,7 +107,7 @@ def main(para):
 
     elif para == 'sum_wal':
         if not cf.get('path', 'wal'):
-            path = os.path.join(cf.get('path', 'home'), 'data/wal')
+            path = os.path.join(cf.get('path', 'iotdb_home'), 'data/wal')
         else:
             path = cf.get('path', 'wal')
         results = os.popen('du -s %s' % path).read()
