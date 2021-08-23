@@ -9,6 +9,8 @@
 8. 统计全部tsfile文件大小，sum_all,int  
 9. 统计全部resource文件大小，sum_resource,int  
 10. 统计wal目录大小，sum_wal,int  
+11. 统计顺序0层tsfile数量，count_seq_lv0,int  
+12. 统计乱序0层tsfile数量，count_unseq_lv0,int  
 
 ## 依赖
 ### python依赖
