@@ -112,16 +112,16 @@ def main(para):
     elif para == 'sum_all':  # 统计全部tsfile大小
         print(data_tsfile_sum(''))
 
-    elif para == 'sum_resource':
+    elif para == 'sum_resource':  # 统计全部resource文件大小
         print(data_resource_sum())
 
-    elif para == 'sum_wal':
+    elif para == 'sum_wal':  # 统计wal文件夹大小
         print(wal_sum())
 
-    elif para == 'count_seq_lv0':
+    elif para == 'count_seq_lv0':  # 统计全部顺序0层tsfile大小
         print(data_tsfile_level_count('sequence'))
 
-    elif para == 'count_unseq_lv0':
+    elif para == 'count_unseq_lv0':  # 统计全部乱序tsfile大小
         print(data_tsfile_level_count('unsequence'))
 
     else:

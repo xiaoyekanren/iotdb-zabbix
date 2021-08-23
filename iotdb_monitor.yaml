@@ -1,6 +1,6 @@
 zabbix_export:
   version: '5.4'
-  date: '2021-07-27T08:19:36Z'
+  date: '2021-08-23T15:36:23Z'
   groups:
     -
       uuid: f2481361f99448eea617b7b1d4765566
@@ -28,6 +28,10 @@ zabbix_export:
           name: IoTDB-顺序TsFile数量
           key: 'iotdb_monitor[count_seq]'
         -
+          uuid: 1f427d41fec94942bcd4132d6b69ab9e
+          name: IoTDB-顺序TsFile-0层数量
+          key: 'iotdb_monitor[count_seq_lv0]'
+        -
           uuid: 6d5577bea30a4afd9140feadb5841108
           name: IoTDB-存储组
           key: 'iotdb_monitor[count_storage_group]'
@@ -39,6 +43,10 @@ zabbix_export:
           uuid: db03421e99b94c358683660c043c3a56
           name: IoTDB-乱序TsFile数量
           key: 'iotdb_monitor[count_unseq]'
+        -
+          uuid: fbe5e7b61cf04b60aa3bcb03b5a7fa77
+          name: IoTDB-乱序TsFile-0层数量
+          key: 'iotdb_monitor[count_unseq_lv0]'
         -
           uuid: d391c4a04e994ee49227a95c2853f5f4
           name: IoTDB-Tsfile总大小
