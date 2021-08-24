@@ -9,7 +9,7 @@ cf.read(os.path.join(sys.path[0], 'config.ini'), encoding='utf-8-sig')
 
 
 def error():
-    count = 'COUNT: count_timeseries | count_storage_group | count_seq | count_unseq | count_all| \n'
+    count = 'COUNT: count_timeseries | count_storage_group | count_seq | count_unseq | count_all | count_seq_lv0 | count_unseq_lv0\n'
     total = 'SUM: sum_seq | sum_unseq | sum_all | sum_resource | sum_wal | \n'
 
     print('必须且只能指定一个参数，参数可以是:')
@@ -83,8 +83,37 @@ def wal_sum():
     return int(results.split('\t')[0]) * 1024
 
 
-def monitor_data():
-    pass
+def merge_path(cur, name):
+    return os.path.join(cur, name)
+
+
+def scan(path):
+    cur_folder, cur_file, count_cur_file, count_cur_folder = [], [], 0, 0
+    cur_all_file = os.listdir(path)
+    for i in cur_all_file:
+        abs_path = merge_path(path, i)
+        # print('scan->abs_path %s' % abs_path)
+        if os.path.isfile(abs_path):
+            count_cur_file += 1
+            # cur_file.append(path)  # 文件列表，可打开注释
+        else:
+            count_cur_folder += 1
+            cur_folder.append(abs_path)
+    return count_cur_folder, cur_folder
+
+
+def loop(folders):
+    for one_path in folders:
+        # print('loop->one_path %s' % one_path)
+        count_cur_folder, cur_folder = scan(one_path)
+        if count_cur_folder > 0:
+            loop(cur_folder)
+
+
+def master():
+    paths = check_data('data')
+    for path in paths.split(','):
+        loop(path.split())
 
 
 def main(para):
