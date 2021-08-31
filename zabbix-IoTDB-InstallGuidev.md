@@ -23,7 +23,7 @@ vim /etc/zabbix/zabbix_agentd.conf
 新增
 Include=/etc/zabbix/zabbix_agentd.d/iotdb_monitor.conf
 ```
->3. 新建iotdb_monitor.conf
+>3. 新建iotdb_monitor.conf  
 新建文件，并增加内容：
 ```
 vim /etc/zabbix/zabbix_agentd.d/iotdb_monitor.conf
