@@ -127,7 +127,6 @@ def scan(mode, path, extension_name):
             if os.path.isfile(abs_file):
                 if i.split('.')[-1] == extension_name:
                     cur_size += os.path.getsize(abs_file)
-                    print(cur_size)
             else:
                 count_cur_folder += 1
                 cur_folder.append(abs_file)
