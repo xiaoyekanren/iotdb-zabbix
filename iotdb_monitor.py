@@ -1,11 +1,13 @@
 # coding=utf-8
-import os.path
+import os
 import sys
 from configparser import ConfigParser
 from iotdb.Session import Session
 
 cf = ConfigParser()
 cf.read(os.path.join(sys.path[0], 'config.ini'), encoding='utf-8-sig')
+
+result = 0
 
 
 def error():
@@ -36,6 +38,23 @@ def check_data(path):
         return os.path.join(cf.get('path', 'iotdb_home'), 'data/data')
     else:
         return cf.get('path', path)
+
+
+def get_path(path):
+    """
+    返回wal路径，返回一个路径字符串；
+    返回data路径，返回的是一个需要split(',')的字符串；
+    """
+    if path == 'wal':
+        if not cf.get('path', path):
+            return os.path.join(cf.get('path', 'iotdb_home'), 'data/wal')
+        else:
+            return cf.get('path', path)
+    if path == 'data':
+        if not cf.get('path', path):
+            return os.path.join(cf.get('path', 'iotdb_home'), 'data/data')
+        else:
+            return cf.get('path', path)
 
 
 def data_tsfile_count(para):
@@ -87,33 +106,62 @@ def merge_path(cur, name):
     return os.path.join(cur, name)
 
 
-def scan(path):
-    cur_folder, cur_file, count_cur_file, count_cur_folder = [], [], 0, 0
+def scan(mode, path, extension_name):
+    cur_folder, cur_file, count_cur_file, count_cur_folder, cur_size = [], [], 0, 0, 0
     cur_all_file = os.listdir(path)
-    for i in cur_all_file:
-        abs_path = merge_path(path, i)
-        # print('scan->abs_path %s' % abs_path)
-        if os.path.isfile(abs_path):
-            count_cur_file += 1
-            # cur_file.append(path)  # 文件列表，可打开注释
-        else:
-            count_cur_folder += 1
-            cur_folder.append(abs_path)
-    return count_cur_folder, cur_folder
+
+    if mode == 'count':
+        for i in cur_all_file:
+            abs_file = merge_path(path, i)
+            if os.path.isfile(abs_file):
+                if i.split('.')[-1] == extension_name:
+                    count_cur_file += 1
+                # cur_file.append(path)  # 文件列表，可打开注释
+            else:
+                count_cur_folder += 1
+                cur_folder.append(abs_file)
+        return count_cur_folder, cur_folder, count_cur_file
+    elif mode == 'sum':
+        for i in cur_all_file:
+            abs_file = merge_path(path, i)
+            if os.path.isfile(abs_file):
+                if i.split('.')[-1] == extension_name:
+                    cur_size += os.path.getsize(abs_file)
+                    print(cur_size)
+            else:
+                count_cur_folder += 1
+                cur_folder.append(abs_file)
+        return count_cur_folder, cur_folder, cur_size
 
 
-def loop(folders):
-    for one_path in folders:
-        # print('loop->one_path %s' % one_path)
-        count_cur_folder, cur_folder = scan(one_path)
+def loop(mode, folders, extension_name):
+    global result
+    for one_path in list(folders):
+        count_cur_folder, cur_folder, mode_result = scan(mode, one_path, extension_name)
+        result += mode_result
         if count_cur_folder > 0:
-            loop(cur_folder)
+            loop(mode, cur_folder, extension_name)
 
 
-def master():
-    paths = check_data('data')
-    for path in paths.split(','):
-        loop(path.split())
+def master(mode, item, extension_name):
+    """
+    :param mode: count、sum  # 统计大小，还是统计数量
+    :param item: wal、data  # 统计的wal，还是data
+    :param extension_name:  # 判断的文件拓展名，tsfile 还是 resource
+    :return:
+    """
+    global result
+    if item == 'wal':
+        loop(mode, get_path(item), extension_name)
+        return result
+    elif item == 'data':
+        for path in get_path('data').split(','):
+            loop(mode, path.split(), extension_name)
+    elif item == 'sequence' or item == 'unsequence':
+        for path in get_path('data').split(','):
+            loop(mode, str(os.path.join(path, item)).split(), extension_name)
+    print(result)
+    result = 0
 
 
 def main(para):
@@ -125,33 +173,46 @@ def main(para):
 
     elif para == 'count_seq':  # 统计顺序tsfile数量
         print(data_tsfile_count('sequence'))
+        master('count', 'sequence', 'tsfile')
 
-    elif para == 'sum_seq':
-        print(data_tsfile_sum('sequence'))  # 统计顺序tsfile大小
+    elif para == 'sum_seq':  # 统计顺序tsfile大小
+        print(data_tsfile_sum('sequence'))
+        master('sum', 'sequence', 'tsfile')
 
-    elif para == 'count_unseq':
-        print(data_tsfile_count('unsequence'))  # 统计乱序tsfile数量
+    elif para == 'count_unseq':  # 统计乱序tsfile数量
+        print(data_tsfile_count('unsequence'))
+        master('count', 'unsequence', 'tsfile')
 
-    elif para == 'sum_unseq':
-        print(data_tsfile_sum('unsequence'))  # 统计乱序tsfile大小
+    elif para == 'sum_unseq':  # 统计乱序tsfile大小
+        print(data_tsfile_sum('unsequence'))
+        master('sum', 'unsequence', 'tsfile')
 
     elif para == 'count_all':  # 统计全部tsfile数量
         print(data_tsfile_count(''))
+        master('count', 'data', 'tsfile')
 
     elif para == 'sum_all':  # 统计全部tsfile大小
         print(data_tsfile_sum(''))
+        master('sum', 'data', 'tsfile')
 
     elif para == 'sum_resource':  # 统计全部resource文件大小
         print(data_resource_sum())
+        master('sum', 'data', 'resource')
+
+    elif para == 'count_resource':  # 统计全部resource数量
+        master('count', 'data', 'resource')
 
     elif para == 'sum_wal':  # 统计wal文件夹大小
-        print(wal_sum())
+        pass
+        # print(wal_sum())
 
     elif para == 'count_seq_lv0':  # 统计全部顺序0层tsfile大小
-        print(data_tsfile_level_count('sequence'))
+        pass
+        # print(data_tsfile_level_count('sequence'))
 
     elif para == 'count_unseq_lv0':  # 统计全部乱序tsfile大小
-        print(data_tsfile_level_count('unsequence'))
+        pass
+        # print(data_tsfile_level_count('unsequence'))
 
     else:
         error()
