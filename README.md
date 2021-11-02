@@ -1,4 +1,4 @@
-# zabbix-IoTDB监控安装方式  
+# zabbix_IoTDB监控安装方式  
 > * zabbix版本  
 5.4.3  
 > * agent操作系统版本   
